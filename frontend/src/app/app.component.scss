@@ -1,0 +1,45 @@
+:host {
+  header {
+    position: relative;
+    width: 100%;
+    padding: 0 25px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    color: white;
+    z-index: 9;
+    nav {
+      a.green-text {
+        font-size: 20px;
+        color: #008000;
+        img {
+          padding-bottom: 10px;
+        }
+      }
+    }
+    #navbarNav {
+      padding-bottom: 5px;
+    }
+  }
+  .page {
+    padding-top: 25px;
+    background-color: #f9f9f9;
+    min-height: 90vh;
+  }
+
+  footer {
+    background-color: #212529;
+    font-weight: 300;
+    .grey-text {
+      color: #212529bf;
+    }
+    .text-footer {
+      color: #999999;
+    }
+    .description {
+      font-size: 14px;
+    }
+    .text-bottom {
+      padding-top: 28px;
+    }
+  }
+}

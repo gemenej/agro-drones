@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="ms-3">Деталі дрону</h2>
+<mat-dialog-content>
+  <mat-list>
+    <mat-list-item> <strong>Модель:</strong> {{ drone.name }} </mat-list-item>
+    <mat-list-item>
+      <strong>Серійний номер:</strong> {{ drone.serialNumber }}
+    </mat-list-item>
+    <mat-list-item>
+      <strong>Статус:</strong> {{ getStatusLabel(drone.status) }}
+    </mat-list-item>
+    <mat-list-item>
+      <strong>Рівень заряду:</strong>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="drone.batteryLevel"
+        [color]="getBatteryColor(drone.batteryLevel)"
+      >
+      </mat-progress-bar>
+      {{ drone.batteryLevel }}%
+    </mat-list-item>
+    <mat-list-item *ngIf="drone.currentLocation">
+      <strong>Поточне місцезнаходження:</strong>
+      Широта: {{ drone.currentLocation.lat }}, Довгота:
+      {{ drone.currentLocation.lng }}
+    </mat-list-item>
+  </mat-list>
+
+  <mat-dialog-actions class="mt-3">
+    <button mat-flat-button color="primary" (click)="onClose()">Закрити</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

@@ -1,0 +1,35 @@
+:host {
+  .task-management-container {
+    margin-bottom: 50px;
+    header {
+      .actions-toolbar {
+        text-align: end;
+      }
+    }
+    .task-type- {
+      &seeding {
+        color: blue;
+      }
+      &fertilizing {
+        color: green;
+      }
+      &spraying {
+        color: orange;
+      }
+    }
+    .task-status- {
+      &planned {
+        color: gray;
+      }
+      &in_progress {
+        color: blue;
+      }
+      &completed {
+        color: green;
+      }
+      &failed {
+        color: red;
+      }
+    }
+  }
+}

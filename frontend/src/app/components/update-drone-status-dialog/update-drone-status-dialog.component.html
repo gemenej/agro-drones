@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Оновити статус дрону</h2>
+<mat-dialog-content>
+  <mat-form-field class="example-full-width">
+    <mat-label>Статус</mat-label>
+    <mat-select [(value)]="selectedStatus">
+      <mat-option value="available">Доступний</mat-option>
+      <mat-option value="in_mission">В місії</mat-option>
+      <mat-option value="charging">Заряджається</mat-option>
+      <mat-option value="maintenance">Технічне обслуговування</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-dialog-actions>
+    <button mat-button color="warn" (click)="onCancel()">Скасувати</button>
+    <button mat-flat-button color="primary" (click)="onSave()">Зберегти</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

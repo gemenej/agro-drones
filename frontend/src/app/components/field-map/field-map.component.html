@@ -1,0 +1,113 @@
+<div class="container-fluid page-map">
+  <div class="row">
+    <div class="col-9">
+      <div class="filters-block mb-2 row">
+        <div class="col-6">
+          <mat-button-toggle-group
+            class="filter-buttons"
+            name="fontStyle"
+            aria-label="Font Style"
+            [(value)]="selectedOperation"
+            (change)="filterLayersByOperation($event.value)"
+          >
+            <mat-button-toggle value="all">Всі</mat-button-toggle>
+            <mat-button-toggle [style.color]="'green'" value="green"
+              >Посів</mat-button-toggle
+            >
+            <mat-button-toggle [style.color]="'orange'" value="yellow"
+              >Внесення добрив</mat-button-toggle
+            >
+            <mat-button-toggle [style.color]="'blue'" value="blue"
+              >Обприскування</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
+
+        <div class="col-6">
+          <mat-button-toggle-group
+            class="filter-buttons ms-auto"
+            name="fontStyle"
+            aria-label="Font Style"
+            [(value)]="selectedStatus"
+            (change)="filterLayersByStatus($event.value)"
+          >
+            <mat-button-toggle value="all">Всі</mat-button-toggle>
+            <mat-button-toggle [style.color]="'grey'" value="planned"
+              >Заплановано</mat-button-toggle
+            >
+            <mat-button-toggle [style.color]="'green'" value="completed"
+              >Виконано</mat-button-toggle
+            >
+            <mat-button-toggle [style.color]="'blue'" value="in_progress"
+              >В процесі</mat-button-toggle
+            >
+            <mat-button-toggle [style.color]="'red'" value="failed"
+              >Не вдалось</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
+      </div>
+
+      <div id="map" class="map-container"></div>
+    </div>
+    <div class="col-3">
+      @if (fieldForm) {
+      <mat-card class="mb-3">
+        <mat-card-header>
+          <mat-card-title>Поле</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="fieldForm" (ngSubmit)="submitField()">
+            <mat-form-field class="example-full-width">
+              <mat-label>Назва поля</mat-label>
+              <input matInput formControlName="name" placeholder="Назва поля" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Площа (гектарів)</mat-label>
+              <input
+                matInput
+                formControlName="area"
+                [style.width.%]="100"
+                type="number"
+                placeholder="Площа (гектарів)"
+              />
+            </mat-form-field>
+            <button
+              mat-button
+              color="warn"
+              type="button"
+              (click)="cancelField()"
+            >
+              Скасувати
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              type="submit"
+              [disabled]="!fieldForm.valid"
+            >
+              Зберегти поле
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+      }
+      <mat-card class="mb-3">
+        <mat-card-header>
+          <mat-card-title>Завдання:</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="task-list">
+            <div class="task-item" *ngFor="let task of activeTasks">
+              <div class="task-item-header">
+                <span>{{ task.field.name }}: </span>
+                <span>{{ getTaskTypeLabel(task.operation) }} </span>
+                <span>{{ task.plannedDate | date : "dd.MM.yyyy HH:mm" }}</span>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

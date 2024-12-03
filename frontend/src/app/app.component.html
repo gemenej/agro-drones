@@ -1,0 +1,109 @@
+<header>
+  <nav class="navbar navbar-expand-lg py-0">
+    <a
+      class="navbar-brand ms-3 green-text font-32"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img
+        src="assets/images/agro-drone.svg"
+        alt="logo"
+        width="50"
+        height="50"
+        class=""
+      />
+      <span> AGRO DRONES </span>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div *ngIf="isAuthenticated$ | async" class="collapse navbar-collapse mx-auto" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"
+            >Карта</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/drones" routerLinkActive="active"
+            >Дрони</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/tasks" routerLinkActive="active"
+            >Завдання</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <ng-container *ngIf="isAuthenticated$ | async">
+      <button
+        mat-button
+        [matMenuTriggerFor]="menu"
+        aria-label="User menu"
+        class="ms-auto me-3"
+      >
+        <mat-icon>person</mat-icon> {{ (currentUser$ | async)?.name }}
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon> Вийти
+        </button>
+      </mat-menu>
+    </ng-container>
+    <ng-container *ngIf="!(isAuthenticated$ | async)">
+      <a mat-button routerLink="login" routerLinkActive="active" class="ms-auto me-3">
+        <mat-icon>login</mat-icon> Логін
+      </a>
+      <a mat-button routerLink="signup" routerLinkActive="active" class="me-3">
+        <mat-icon>person_add</mat-icon> Зареєструватися
+      </a>
+    </ng-container>
+  </nav>
+</header>
+
+<div class="page">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="footer mt-auto pt-4 pb-3">
+  <div class="container">
+    <div class="row">
+    <div class="col-9">
+    <a
+      class="navbar-brand text-footer font-32"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img
+        src="assets/images/agro-drone-g.svg"
+        alt="logo"
+        width="30"
+        height="30"
+        class=""
+      />
+      <span> AGRO DRONES </span>
+    </a>
+    <p class="description text-footer">
+      <span>Розробка вебдодатка застосування агродронів для оптимізації сільськогосподарського виробництва.</span>
+    </p>
+    </div>
+    <div class="col-3 text-bottom text-right">
+      <span class="text-footer">© 2024 AGRO DRONES</span>
+    </div>
+    </div>
+  </div>
+</footer>
+

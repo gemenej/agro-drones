@@ -1,0 +1,86 @@
+<h2 mat-dialog-title>Створення нового завдання</h2>
+<mat-dialog-content>
+  <form [formGroup]="taskForm">
+    <mat-form-field>
+      <mat-label>Дрон</mat-label>
+      <mat-select formControlName="drone">
+        @for (drone of data.drones; track drone._id) {
+        <mat-option [value]="drone._id">
+          {{ drone.name }}
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ms-2">
+      <mat-label>Поле</mat-label>
+      <mat-select formControlName="field">
+        <mat-option *ngFor="let field of data.fields" [value]="field._id">
+          {{ field.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Тип операції</mat-label>
+      <mat-select formControlName="operation">
+        <mat-option value="seeding">Посів</mat-option>
+        <mat-option value="fertilizing">Внесення добрив</mat-option>
+        <mat-option value="spraying">Обприскування</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ms-2">
+      <mat-label>Статус</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="planned">Заплановано</mat-option>
+        <mat-option value="in_progress">В процесі</mat-option>
+        <mat-option value="completed">Виконано</mat-option>
+        <mat-option value="failed">Не вдалося</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="width-80">
+      <mat-label>Дата початку</mat-label>
+      <input matInput formControlName="startTime" [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Час початку</mat-label>
+      <input
+        matInput
+        formControlName="startHour"
+        placeholder="13:00"
+        (blur)="updateStartHourMessage()"
+      />
+      <mat-hint>Формат: HH:mm</mat-hint>
+      <mat-error *ngIf="startHour.invalid">{{
+        errorStartHourMessage
+      }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Тривалість (годин)</mat-label>
+      <input
+        matInput
+        formControlName="period"
+        type="number"
+        placeholder="2"
+      />
+    </mat-form-field>
+  </form>
+
+  <mat-dialog-actions>
+    <button mat-button color="warn" (click)="onCancel()">Скасувати</button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onSave()"
+      [disabled]="taskForm.invalid"
+    >
+      Зберегти
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

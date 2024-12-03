@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Видалити дрон {{ data.name }}</h2>
+<mat-dialog-content>
+  <p>
+    Ви впевнені, що хочете видалити дрон <strong>{{ data.name }}</strong>?
+    <br>Дрон буде видалено назавжди.
+  </p>
+  <mat-dialog-actions>
+    <button mat-button color="warn" (click)="onNoClick()">
+      Відмінити
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      (click)="submit()"
+      cdkFocusInitial
+    >
+      Видалити
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

@@ -1,0 +1,129 @@
+Розробка вебдодатка застосування агродронів для оптимізації сільськогосподарського виробництва. 
+Я бачу ці роботу приблизно так: з агродрону знімаються показники. Наприклад, ділянки де було виконано посіви чи внесені добрива чи виконано обприскування, тощо і побудувати карту виконаних робіт. 
+Стек технологій: frontend: angular; backend: node.js; maps: leaflet.
+Дрони абстрактні, тобто потрібна реалізація для магістерської роботи.
+
+Отже, початковий функціонал на бекенді вже реалізовано:
+```javascript
+// drone.model.js
+const droneSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  serialNumber: { type: String, required: true, unique: true },
+  batteryLevel: { type: Number, required: true },
+  status: { 
+    type: String, 
+    enum: ['available', 'in_mission', 'charging', 'maintenance'],
+    default: 'available'
+  },
+  lastMission: { type: Date },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point'
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  }
+}, { timestamps: true });
+
+// field.model.js
+const fieldSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  boundaries: {
+    type: {
+      type: String,
+      enum: ['Polygon'],
+      default: 'Polygon'
+    },
+    coordinates: {
+      type: [[[Number]]], // Array of arrays of coordinates forming a polygon
+      required: true
+    }
+  },
+  area: { type: Number, required: true }, // in hectares
+  crops: { type: String },
+  lastOperation: {
+    type: { type: String, enum: ['seeding', 'fertilizing', 'spraying'] },
+    date: Date
+  }
+}, { timestamps: true });
+
+// task.model.js
+const taskSchema = new mongoose.Schema({
+  droneId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Drone',
+    required: true 
+  },
+  fieldId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Field',
+    required: true 
+  },
+  operation: {
+    type: String,
+    enum: ['seeding', 'fertilizing', 'spraying'],
+    required: true
+  },
+  status: {
+    type: String,
+    enum: ['planned', 'in_progress', 'completed', 'failed'],
+    default: 'planned'
+  },
+  plannedDate: { type: Date, required: true },
+  completedDate: { type: Date },
+  coverage: {
+    type: {
+      type: String,
+      enum: ['Polygon'],
+      default: 'Polygon'
+    },
+    coordinates: {
+      type: [[[Number]]]
+    }
+  },
+  telemetryData: [{
+    timestamp: Date,
+    location: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        default: 'Point'
+      },
+      coordinates: [Number]
+    },
+    altitude: Number,
+    speed: Number,
+    batteryLevel: Number
+  }]
+}, { timestamps: true });
+```
+
+Також є три основні контролери для обробки всіх необхідних операцій, і роути для них.
+
+DroneController:
+- CRUD операції для дронів
+- Спеціальний метод для оновлення статусу та місцезнаходження
+- Валідація даних перед збереженням
+
+FieldController:
+- Управління сільськогосподарськими полями
+- Підтримка геопросторових даних (полігони полів)
+- Відстеження останніх операцій на полі
+
+TaskController:
+- Створення та управління завданнями для дронів
+- Автоматичне оновлення статусу дрона при призначенні завдання
+- Збір та зберігання телеметричних даних
+- Зв'язування з дронами та полями через populate()
+
+Давай розпочнем фронтенд частину на angular, angular material, ng-bootstrap.
+Використай leaflet api для реалізації відображення даних (площа поля запланована для обробки, чи що вже виконано)
+різними шарами (кольорами).
+
+
+
+

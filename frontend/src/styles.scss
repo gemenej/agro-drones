@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+
+h1 {
+  font-size: 2rem;
+}
+.hidden {
+  display: none;
+}
+.example-full-width {
+  width: 100%;
+}
+.filter-buttons.mat-button-toggle-group-appearance-standard {
+  border-radius: 9999px;
+}

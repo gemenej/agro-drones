@@ -1,0 +1,27 @@
+:host {
+  .drone-list-container {
+    margin-bottom: 50px;
+    header {
+      .actions-toolbar {
+        text-align: end;
+      }
+    }
+    .actions-toolbar {
+      margin-bottom: 15px;
+    }
+    .status- {
+      &available {
+        color: green;
+      }
+      &in_mission {
+        color: orange;
+      }
+      &charging {
+        color: blue;
+      }
+      &maintrance {
+        color: red;
+      }
+    }
+  }
+}

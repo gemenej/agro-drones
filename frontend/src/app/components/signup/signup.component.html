@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="auth-form mx-auto">
+        <h3>Зареєструватися</h3>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Ім'я:</mat-label>
+              <input
+                matInput
+                type="text"
+                [formControl]="name"
+                (blur)="updateNameErrorMessage()"
+                autocomplete="one-time-code"
+              />
+              @if (name.value !== '') {
+              <button
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="name.setValue('')"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+              } @if (name.invalid) {
+              <mat-error>{{ errorNameMessage }}</mat-error>
+              }
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Email:</mat-label>
+              <input
+                matInput
+                type="email"
+                [formControl]="email"
+                (blur)="updateEmailErrorMessage()"
+                autocomplete="one-time-code"
+              />
+              @if (email.value !== '') {
+              <button
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="email.setValue('')"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+              } @if (email.invalid) {
+              <mat-error>{{ errorEmailMessage }}</mat-error>
+              }
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Password:</mat-label>
+              <input
+                matInput
+                type="password"
+                [formControl]="password"
+                (blur)="updatePasswordErrorMessage()"
+                autocomplete="one-time-code"
+              />
+              @if (password.value !== '') {
+              <button
+                matSuffix
+                mat-icon-button
+                aria-label="Clear"
+                (click)="password.setValue('')"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+              } @if (password.invalid) {
+              <mat-error>{{ errorPasswordMessage }}</mat-error>
+              }
+            </mat-form-field>
+          </p>
+          <button
+            mat-raised-button
+            type="submit"
+            color="primary"
+            [disabled]="signupForm.invalid"
+          >
+            Зареєструватися
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

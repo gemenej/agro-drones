@@ -1,0 +1,2 @@
+# include .gitignore files in subdirectories
+!**/.gitignore

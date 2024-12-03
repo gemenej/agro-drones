@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="drone-list-container">
+        <header class="row mb-3">
+          <h1 class="mat-mdc-card-title col-9">Управління дронами</h1>
+          <div class="actions-toolbar col-3">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="openAddDroneDialog()"
+            >
+              Додати новий дрон
+            </button>
+          </div>
+        </header>
+
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Модель</mat-header-cell>
+            <mat-cell *matCellDef="let drone">{{ drone.name }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
+            <mat-cell *matCellDef="let drone">
+              <span
+                [ngClass]="{
+                'status-available': drone.status === 'available',
+                'status-in_mission': drone.status === 'in_mission',
+                'status-charging': drone.status === 'charging',
+                'status-maintenance': drone.status === 'maintenance',
+              }"
+                >{{ getStatusLabel(drone.status) }}</span
+              >
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="batteryLevel">
+            <mat-header-cell *matHeaderCellDef>Заряд батареї</mat-header-cell>
+            <mat-cell *matCellDef="let drone">
+              <mat-progress-bar
+                mode="determinate"
+                [value]="drone.batteryLevel"
+                [color]="getBatteryColor(drone.batteryLevel)"
+              >
+              </mat-progress-bar>
+              {{ drone.batteryLevel }}%
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Дії</mat-header-cell>
+            <mat-cell *matCellDef="let drone">
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="viewDroneDetails(drone)"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="accent"
+                (click)="openUpdateDroneStatusDialog(drone)"
+              >
+                <mat-icon>update</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="openDeleteDialog(drone)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Додати новий дрон</h2>
+<mat-dialog-content>
+  <form [formGroup]="droneForm">
+    <mat-form-field >
+      <mat-label>Назва дрону</mat-label>
+      <input matInput formControlName="name" required />
+    </mat-form-field>
+
+    <mat-form-field class="ms-2">
+      <mat-label>Модель дрону</mat-label>
+      <input matInput formControlName="model" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Серійний номер</mat-label>
+      <input matInput formControlName="serialNumber" required />
+    </mat-form-field>
+
+    <mat-form-field class="ms-2">
+      <mat-label>Рівень заряду батареї</mat-label>
+      <input matInput formControlName="batteryLevel" type="number" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Статус</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="available">Доступний</mat-option>
+        <mat-option value="in_mission">В місії</mat-option>
+        <mat-option value="charging">Заряджається</mat-option>
+        <mat-option value="maintenance">Технічне обслуговування</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <mat-dialog-actions>
+    <button mat-button color="warn" (click)="onCancel()">Скасувати</button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onSave()"
+      [disabled]="droneForm.invalid"
+    >
+      Зберегти
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

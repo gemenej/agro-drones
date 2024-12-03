@@ -1,0 +1,14 @@
+/* swagger-custom.css */
+.swagger-ui .responses-wrapper {
+  float: right;
+  width: 50%;
+}
+
+.swagger-ui .opblock-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.swagger-ui .opblock-body .opblock-section {
+  width: 50%;
+}
