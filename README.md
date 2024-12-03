@@ -87,7 +87,7 @@ npm start
 [![Create Task](./images/create-task.png)](./images/create-task.png)
 
 - Після створення завдань можна перейти до вкладки `Карта`, де відобразяится поля та завдання на карті:
-[![Map](./images/map.png)](./images/interactive-map.png)
+[![Map](./images/interactive-map.png)](./images/interactive-map.png)
 
 - При натисканні на поле відкриється вікно з детальною інформацією про поле або завдання, якщо призначене для поля.
 
