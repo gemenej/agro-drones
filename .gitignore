@@ -1,2 +1,5 @@
 # include .gitignore files in subdirectories
 !**/.gitignore
+
+# ignore .DS_Store files
+.DS_Store
