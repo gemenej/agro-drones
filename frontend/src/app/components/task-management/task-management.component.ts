@@ -72,7 +72,7 @@ export class TaskManagementComponent implements OnInit {
 
   openCreateTaskDialog() {
     const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
-      width: '480px',
+      width: '500px',
       data: { drones: this.drones, fields: this.fields },
     });
 

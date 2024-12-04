@@ -19,3 +19,10 @@ h1 {
 .filter-buttons.mat-button-toggle-group-appearance-standard {
   border-radius: 9999px;
 }
+.leaflet-pane.leaflet-marker-pane {
+  .leaflet-marker-icon.field-label {
+    min-width: 100px!important;
+    width: 100%!important;
+  }
+}
+
